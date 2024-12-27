@@ -23,9 +23,9 @@ const Sidebar = () => {
       <div
         className={`${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } fixed md:static top-0 left-0 w-64 h-screen bg-[#f6f5f5] text-black p-5 transition-transform duration-300 md:translate-x-0 z-40`}
+        } fixed md:static top-0 left-0 w-54 h-screen bg-[#f6f5f5] text-black p-5 transition-transform duration-300 md:translate-x-0 z-40`}
       >
-        <h3 className="text-xl font-semibold mb-6">Order Management</h3>
+        <h3 className="text-xl font-semibold mb-6">Order Manager</h3>
         <ul className="space-y-1">
           {navLinks.map(({ path, label, icon: Icon }) => (
             <li key={path}>
