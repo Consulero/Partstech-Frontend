@@ -1,20 +1,29 @@
 import React, { useState } from "react";
 import { FaCarAlt, FaChevronDown } from "react-icons/fa";
+import { SearchVehicleFormData } from "../data";
 
 const SearchVehicle = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("vin");
+  const [activeTab, setActiveTab] = useState("Tab1");
+  const [formData, setFormData] = useState(SearchVehicleFormData);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
+  const onClose = () => {
+    setIsModalOpen(false);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSave = () => {
+    alert(`Saved Data: ${JSON.stringify(formData)}`);
+    setFormData(SearchVehicleFormData);
+    onClose();
   };
 
   return (
@@ -27,85 +36,112 @@ const SearchVehicle = () => {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 bg-white bg-opacity-30 flex justify-center items-center">
-          <div className="bg-white p-4 rounded-lg shadow-lg w-96 h-auto">
-            {/* tab section */}
-            <div className="flex justify-start mb-4">
+        <div className="fixed inset-0 bg-gray-100 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-gray-100 w-96 p-4 rounded shadow-lg">
+            {/* Modal Header with Tabs */}
+            <div className="flex border-b">
               <button
-                onClick={() => handleTabChange("vin")}
-                className={`px-4 py-1 ${
-                  activeTab === "vin" ? "bg-blue-500 text-white" : "bg-gray-200"
+                className={`flex-1 p-2 ${
+                  activeTab === "Tab1"
+                    ? "border-b-2 border-blue-500 font-bold"
+                    : ""
                 }`}
+                onClick={() => setActiveTab("Tab1")}
+              >
+                Make/Model/Year
+              </button>
+              <button
+                className={`flex-1 p-2 ${
+                  activeTab === "Tab2"
+                    ? "border-b-2 border-blue-500 font-bold"
+                    : ""
+                }`}
+                onClick={() => setActiveTab("Tab2")}
               >
                 VIN
               </button>
-              <button
-                onClick={() => handleTabChange("tin")}
-                className={`px-4 py-1 ${
-                  activeTab === "tin" ? "bg-blue-500 text-white" : "bg-gray-200"
-                }`}
-              >
-                Year/Make/Model
-              </button>
             </div>
-            {/* Content for Active Tab */}
-            <div className="mb-2 h-20 ">
-              {activeTab === "vin" && (
+
+            {/* Modal Body */}
+            <div className="p-4">
+              {activeTab === "Tab1" && (
                 <>
-                  <input
-                    type="text"
-                    className="w-2/3 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Enter VIN Number"
-                  />
-                  <div className="text-center mt-4 mr-1">
-                    <button
-                      className="px-4 py-1 bg-green-500 text-white rounded"
-                      onClick={closeModal}
-                    >
-                      Search
-                    </button>
-                    <button
-                      className="ml-2 px-4 py-1 bg-red-500 text-white rounded"
-                      onClick={closeModal}
-                    >
-                      Close
-                    </button>
-                  </div>
+                  <table className="w-full">
+                    <tbody>
+                      <tr>
+                        <td className="pb-2">
+                          <input
+                            type="text"
+                            name="year"
+                            value={formData.year}
+                            onChange={handleInputChange}
+                            className="w-full p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Enter Year"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="pb-2">
+                          <input
+                            type="text"
+                            name="make"
+                            value={formData.make}
+                            onChange={handleInputChange}
+                            className="w-full p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Enter Make"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <input
+                            type="text"
+                            name="model"
+                            value={formData.model}
+                            onChange={handleInputChange}
+                            className="w-full p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Enter Model"
+                          />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </>
               )}
-              {activeTab === "tin" && (
-                <>
-                  <input
-                    type="text"
-                    className="w-1/3 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Year"
-                  />
-                  <input
-                    type="text"
-                    className="w-1/3 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Make"
-                  />
-                  <input
-                    type="text"
-                    className="w-1/3 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Model"
-                  />
-                  <div className="text-center mt-4 mr-1">
-                    <button
-                      className="px-4 py-1 bg-green-500 text-white rounded"
-                      onClick={closeModal}
-                    >
-                      Search
-                    </button>
-                    <button
-                      className="ml-2 px-4 py-1 bg-red-500 text-white rounded"
-                      onClick={closeModal}
-                    >
-                      Close
-                    </button>
-                  </div>
-                </>
+              {activeTab === "Tab2" && (
+                <table className="w-full">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <input
+                          type="text"
+                          name="vin"
+                          value={formData.vin}
+                          onChange={handleInputChange}
+                          className="w-full p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          placeholder="Enter VIN"
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               )}
+            </div>
+
+            {/* Modal Footer */}
+            <div className="flex justify-end gap-2">
+              <button
+                className="bg-gray-200 px-4 py-1 rounded"
+                onClick={onClose}
+              >
+                Close
+              </button>
+              <button
+                className="bg-blue-500 text-white px-4 py-1 rounded"
+                onClick={handleSave}
+              >
+                Save
+              </button>
             </div>
           </div>
         </div>
