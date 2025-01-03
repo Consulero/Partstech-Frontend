@@ -23,8 +23,8 @@ const SearchCatalog = () => {
         onChange={handleCategoryChange}
         className="px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
       >
-        <option value="tier">Tier</option>
         <option value="parts">Parts</option>
+        <option value="tyre">Tyre</option>
       </select>
       <input
         type="text"

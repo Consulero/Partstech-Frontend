@@ -17,8 +17,8 @@ const Catalog = () => {
         <div className="bg-gray-100 w-3/4 h-full">
           <div className="bg-white p-4 border rounded-lg shadow h-full">
             <div className="h-[480px] overflow-y-auto">
-              {PartsData.map((item, index) => (
-                <ItemDetail index={index} item={item} />
+              {PartsData?.map((item, index) => (
+                <ItemDetail key={item.id} item={item} />
               ))}
             </div>
           </div>

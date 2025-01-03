@@ -17,7 +17,21 @@ api.interceptors.request.use(
   }
 );
 
-export const getFiles = (page = 1, archived = false) =>
-  api.get(`/pdf-manuals?page=${page}&archived=${archived}`);
+export const getYears = () => api.get(`/ps-vehicle/years`);
+export const getMakes = (year) => api.get(`/ps-vehicle/makes?year=${year}`);
+export const getModels = (make, year) =>
+  api.get(`/ps-vehicle/models?make=${make}&year=${year}`);
+export const getSubmodels = (make, year, model) =>
+  api.get(`/ps-vehicle/submodels?make=${make}&year=${year}&model=${model}`);
+export const getEngines = (make, year, model, submodel) =>
+  api.get(
+    `/ps-vehicle/engines?make=${make}&year=${year}&model=${model}&submodel=${submodel}`
+  );
+export const getVehicleByVin = (vin) => api.get(`/ps-vehicle/vin?vin=${vin}`);
+export const getVehicleByDetails = (make, year, model, submodel, engine) =>
+  api.get(
+    `/ps-vehicle/detail?make=${make}&year=${year}&model=${model}&submodel=${submodel}&engine=${engine}`
+  );
+
 
 export default api;

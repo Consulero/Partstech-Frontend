@@ -1,13 +1,24 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../redux/slices/cartSlice";
+import { useRecoilState } from "recoil";
+import { cartState } from "../atoms/cartAtom";
 
-const ItemDetail = ({ index, item }) => {
+const ItemDetail = ({ item }) => {
   const [quantity, setQuantity] = useState(1);
-  const dispatch = useDispatch();
+  const [cartItems, setCartItems] = useRecoilState(cartState);
 
   const handleAddToCart = () => {
-    dispatch(addToCart({ id: item.id, title: item.title, price: item.price, quantity }));
+    const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
+    if (existingItem) {
+      setCartItems(
+        cartItems.map((cartItem) =>
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity + quantity }
+            : cartItem
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...item, quantity }]);
+    }
   };
 
   return (
@@ -17,7 +28,7 @@ const ItemDetail = ({ index, item }) => {
         <p>{item.description}</p>
       </div>
       <div className="text-right">
-        <p className="text-lg font-bold text-gray-700">{item.price}</p>
+        <p className="text-lg font-bold text-gray-700">${item.price}</p>
         <input
           type="number"
           min="1"
