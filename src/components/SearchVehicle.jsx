@@ -71,15 +71,15 @@ const SearchVehicle = () => {
   // console.log("vehicleInfo", vehicleInfo);
 
   useEffect(() => {
-    try {
-      const fetchData = async () => {
+    const fetchData = async () => {
+      try {
         const response = await getYears();
         setYears(response.data);
-      };
-      fetchData();
-    } catch (error) {
-      console.error(error);
-    }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
   }, []);
 
   useEffect(() => {

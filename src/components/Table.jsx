@@ -8,7 +8,7 @@ const Table = ({ data, columns, onRowSelect }) => {
               {columns.map((column, index) => (
                 <th
                   key={index}
-                  className="border-b bg-gray-200 p-2 text-sm text-left text-semibold"
+                  className="border-b bg-gray-200 p-2 text-sm text-left text-semibold font-serif"
                   style={{ width: column.width || "auto" }}
                 >
                   {column.header}

@@ -33,5 +33,16 @@ export const getVehicleByDetails = (make, year, model, submodel, engine) =>
     `/ps-vehicle/detail?make=${make}&year=${year}&model=${model}&submodel=${submodel}&engine=${engine}`
   );
 
+export const getCategories = () => api.get(`/ps-category/categories`);
+export const getSubcategories = (category) =>
+  api.get(`/ps-category/subcategories?category=${category}`);
+export const getParts = (category, subcategory) =>
+  api.get(
+    `/ps-category/part-types?category=${category}&subcategory=${subcategory}`
+  );
+export const searchByVechiclePartTypes = (searchParams, partTypeIds) =>
+  api.post(`/ps-search/vehicle/parts-type`, {
+    data: { searchParams, partTypeIds },
+  });
 
 export default api;

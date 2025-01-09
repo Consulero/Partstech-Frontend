@@ -10,7 +10,7 @@ const Sidebar = () => {
     setIsOpen(!isOpen);
   };
 
-  const navLinks = [{ path: "/catalog", label: "Catalog", icon: HomeIcon }];
+  const navLinks = [{ path: "/catalog", label: "Catalog", icon: HomeIcon },{ path: "/review-items", label: "Review Items", icon: HomeIcon }];
 
   return (
     <>
