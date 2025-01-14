@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import Table from "../components/Table";
 import HeaderSection from "../components/HeaderSection";
 import Pagination from "../components/Pagination";
+import { findQuotes } from "../api";
 
-const ReviewItems = () => {
+const Quotes = () => {
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -33,7 +34,7 @@ const ReviewItems = () => {
     setError(null);
 
     try {
-      const response = [];
+      const response = await findQuotes();
       setFiles(response.data?.data || []);
       setTotalPages(response.data?.pagination?.totalPages || 1);
     } catch (err) {
@@ -58,10 +59,10 @@ const ReviewItems = () => {
   };
 
   const columns = [
-    { header: "Supplier", key: "supplier", width: "20%" },
-    { header: "Part Name", key: "partname", width: "20%" },
-    { header: "Status", key: "status", width: "20%" },
-    { header: "Time", key: "time", width: "20%" },
+    { header: "Id", key: "id", width: "20%" },
+    { header: "SessionId", key: "sessionId", width: "20%" },
+    { header: "CreatedAt", key: "createdAt", width: "20%" },
+    { header: "UpdatedAt", key: "updatedAt", width: "20%" },
   ];
 
   if (loading) return <div>Loading files...</div>;
@@ -82,4 +83,4 @@ const ReviewItems = () => {
   );
 };
 
-export default ReviewItems;
+export default Quotes;

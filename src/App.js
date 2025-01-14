@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Catalog from "./pages/Catalog";
-import ReviewItems from "./pages/ReviewItems";
+import Quotes from "./pages/Quotes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -15,7 +15,7 @@ const App = () => {
           <ToastContainer />
           <Routes>
             <Route path="/catalog" element={<Catalog />} />
-            <Route path="/review-items" element={<ReviewItems />} />
+            <Route path="/quotations" element={<Quotes />} />
           </Routes>
         </div>
       </div>

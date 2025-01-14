@@ -44,5 +44,7 @@ export const searchByVechiclePartTypes = (searchParams, partTypeIds) =>
   api.post(`/ps-search/vehicle/parts-type`, {
     data: { searchParams, partTypeIds },
   });
-
+export const findQuotes = () => api.get(`/quotes`);
+export const reqQuotes = (vehicleInfo, partTypeIds) =>
+  api.post(`/quotes/req`, { data: { vehicleInfo, partTypeIds } });
 export default api;

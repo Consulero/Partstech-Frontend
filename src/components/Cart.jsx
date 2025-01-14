@@ -2,9 +2,15 @@ import React from "react";
 import { useRecoilState } from "recoil";
 import { cartState } from "../atoms/cartAtom";
 import { MdDelete, MdOutlineShoppingCart } from "react-icons/md";
+import { vehicleState } from "../atoms/vehicleInfo";
+import { useRecoilValue } from "recoil";
+import { reqQuotes } from "../api";
+import { toast } from "react-toastify";
+import _ from "lodash";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useRecoilState(cartState);
+  const vehicleInfo = useRecoilValue(vehicleState);
 
   const handleDeleteFromCart = (id) => {
     const updatedCart = cartItems.filter((item) => item.id !== id);
@@ -19,6 +25,21 @@ const Cart = () => {
       return item;
     });
     setCartItems(updatedCart);
+  };
+
+  const handleQuotation = async () => {
+    try {
+      if (_.isEmpty(vehicleInfo)) {
+        toast.error("Please select a vehicle");
+        return;
+      }
+      const partIds = cartItems?.map((x) => x.id);
+      const data = await reqQuotes(vehicleInfo, partIds);
+      console.log(data);
+    } catch (e) {
+      console.error(e);
+      toast.error("Could not req for quote");
+    }
   };
 
   return (
@@ -91,10 +112,10 @@ const Cart = () => {
             rows={2}
           />
           <button
-            className="bg-orange-500 text-white px-2 py-2 rounded text-sm shadow-2xl"
-            onClick={() => alert("Checkout feature is not implemented yet")}
+            className="bg-blue-500 text-white px-2 py-2 rounded text-sm shadow-2xl"
+            onClick={handleQuotation}
           >
-            Send For Reviw
+            Send For Quotation
           </button>
         </div>
       )}

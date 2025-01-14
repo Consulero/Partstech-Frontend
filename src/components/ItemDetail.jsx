@@ -39,7 +39,7 @@ const ItemDetail = ({ item }) => {
         />
         <button
           onClick={handleAddToCart}
-          className="bg-orange-500 text-white px-4 py-2 rounded mt-2 text-sm"
+          className="bg-blue-500 text-white px-4 py-2 rounded mt-2 text-sm"
         >
           Add to Cart
         </button>

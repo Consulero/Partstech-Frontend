@@ -14,6 +14,7 @@ import {
 import { vehicleState } from "../atoms/vehicleInfo";
 import { useRecoilState } from "recoil";
 import _ from "lodash";
+import { toast } from "react-toastify";
 
 const SearchVehicle = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -64,11 +65,10 @@ const SearchVehicle = () => {
         onClose();
       }
     } catch (error) {
-      console.error(error); // notification
+      console.error(error);
+      toast.error("Error fetching vehicle info.");
     }
   };
-
-  // console.log("vehicleInfo", vehicleInfo);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,6 +77,7 @@ const SearchVehicle = () => {
         setYears(response.data);
       } catch (error) {
         console.error(error);
+        // toast.error("Error fetching details");
       }
     };
     fetchData();
@@ -108,7 +109,8 @@ const SearchVehicle = () => {
           setMakes(response.data);
         }
       } catch (error) {
-        console.error("Error fetching data:", error); // notification
+        console.error("Error fetching data:", error);
+        toast.error("Error fetching details");
       }
     };
 

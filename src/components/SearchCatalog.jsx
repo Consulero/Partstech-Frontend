@@ -37,7 +37,7 @@ const SearchCatalog = () => {
             { categoryId: 4, categoryName: "Exhaust" },
             { categoryId: 5, categoryName: "Interior" },
             { categoryId: 6, categoryName: "Exterior" },
-            { categoryId: 7, categoryName: "Wheels" },
+            { categoryId: 7, categoryName: "Wheels" },  
             { categoryId: 8, categoryName: "Lighting" },
             { categoryId: 9, categoryName: "Tires" },
             { categoryId: 10, categoryName: "Accessories" },
@@ -59,6 +59,10 @@ const SearchCatalog = () => {
 
   const handleSearch = async () => {
     try {
+      if (_.isEmpty(query)) {
+        toast.error("Please Type keyword to search");
+        return;
+      }
       if (_.isEmpty(vehicleInfo)) {
         toast.error("Please select a vehicle");
         return;
@@ -232,7 +236,7 @@ const SearchCatalog = () => {
       <select
         value={category}
         onChange={(e) => setCategory(e.target.value)}
-        className="px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+        className="px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         <option value="parts">Parts</option>
         <option value="tyre">Tyre</option>
@@ -245,7 +249,7 @@ const SearchCatalog = () => {
           onChange={handleInputChange}
           onFocus={toggleDropdown}
           placeholder={"Search..."}
-          className="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+          className="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         {category !== "tyre" && showDropdown && categories.length > 0 && (
           <div className="absolute z-10 w-full bg-white border border-gray-300 rounded shadow-md max-h-60 overflow-y-auto p-2">
@@ -253,7 +257,10 @@ const SearchCatalog = () => {
               <p className="ml-2 text-center font-semibold mb-2">
                 {status.toLocaleUpperCase()}
               </p>
-              <button className="text-red-500 mr-2" onClick={clearCategorySearch}>
+              <button
+                className="text-red-500 mr-2"
+                onClick={clearCategorySearch}
+              >
                 Clear
               </button>
             </div>
@@ -264,7 +271,7 @@ const SearchCatalog = () => {
                   <div
                     key={cat.categoryId}
                     onClick={() => handleCategorySelect(cat.categoryId)}
-                    className="px-4 py-2 cursor-pointer hover:bg-orange-100 border rounded text-center"
+                    className="px-4 py-2 cursor-pointer hover:bg-blue-100 border rounded text-center"
                   >
                     {cat.categoryName}
                   </div>
@@ -274,7 +281,7 @@ const SearchCatalog = () => {
                   <div
                     key={cat.subcategoryId}
                     onClick={() => handleSubcategorySelect(cat.subcategoryId)}
-                    className="px-4 py-2 cursor-pointer hover:bg-orange-100 border rounded text-center"
+                    className="px-4 py-2 cursor-pointer hover:bg-blue-100 border rounded text-center"
                   >
                     {cat.subcategoryName}
                   </div>
@@ -283,7 +290,7 @@ const SearchCatalog = () => {
                 parts.map((part) => (
                   <div
                     key={part.partTypeId}
-                    className="flex items-center px-4 py-2 cursor-pointer hover:bg-orange-100 border rounded"
+                    className="flex items-center px-4 py-2 cursor-pointer hover:bg-blue-100 border rounded"
                   >
                     <input
                       type="checkbox"
@@ -303,7 +310,7 @@ const SearchCatalog = () => {
 
       <button
         onClick={handleSearch}
-        className="px-4 py-2 text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
+        className="px-4 py-2 text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         Search
       </button>

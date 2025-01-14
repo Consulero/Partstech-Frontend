@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { HomeIcon } from "../icons";
+import { GrCatalog } from "react-icons/gr";
+import { FaFileInvoiceDollar } from "react-icons/fa";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +11,10 @@ const Sidebar = () => {
     setIsOpen(!isOpen);
   };
 
-  const navLinks = [{ path: "/catalog", label: "Catalog", icon: HomeIcon },{ path: "/review-items", label: "Review Items", icon: HomeIcon }];
+  const navLinks = [
+    { path: "/catalog", label: "Catalog", icon: GrCatalog },
+    { path: "/quotations", label: "Quotation", icon: FaFileInvoiceDollar },
+  ];
 
   return (
     <>
