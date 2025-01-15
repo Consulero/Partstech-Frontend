@@ -12,14 +12,14 @@ const Cart = () => {
   const [cartItems, setCartItems] = useRecoilState(cartState);
   const vehicleInfo = useRecoilValue(vehicleState);
 
-  const handleDeleteFromCart = (id) => {
-    const updatedCart = cartItems.filter((item) => item.id !== id);
+  const handleDeleteFromCart = (partId) => {
+    const updatedCart = cartItems.filter((item) => item.partId !== partId);
     setCartItems(updatedCart);
   };
 
-  const handleEditFromCart = (qty, id) => {
+  const handleEditFromCart = (qty, partId) => {
     const updatedCart = cartItems.map((item) => {
-      if (item.id === id) {
+      if (item.partId === partId) {
         return { ...item, quantity: qty };
       }
       return item;
@@ -33,7 +33,7 @@ const Cart = () => {
         toast.error("Please select a vehicle");
         return;
       }
-      const partIds = cartItems?.map((x) => x.id);
+      const partIds = cartItems?.map((x) => x.partId);
       const data = await reqQuotes(vehicleInfo, partIds);
       console.log(data);
     } catch (e) {
@@ -51,10 +51,10 @@ const Cart = () => {
       <div className="h-[345px] flex flex-col border overflow-y-auto">
         {cartItems.length > 0 ? (
           cartItems.map((item) => (
-            <div key={item.id} className="p-4 border-b bg-white text-sm">
+            <div key={item.partId} className="p-4 border-b bg-white text-sm">
               <div className="flex justify-between items-center">
-                <h2 className="font-semibold">{item.title}</h2>
-                <button onClick={() => handleDeleteFromCart(item.id)}>
+                <h2 className="font-semibold">{item.partName}</h2>
+                <button onClick={() => handleDeleteFromCart(item.partId)}>
                   <MdDelete className="text-red-500 hover:text-red-600" />
                 </button>
               </div>
@@ -65,7 +65,7 @@ const Cart = () => {
                   min="1"
                   value={item.quantity}
                   onChange={(e) =>
-                    handleEditFromCart(Number(e.target.value), item.id)
+                    handleEditFromCart(Number(e.target.value), item.partId)
                   }
                   className="border rounded px-2 py-1 w-14 mt-2 mr-2 placeholder:text-sm"
                   placeholder="Qty"
@@ -107,6 +107,7 @@ const Cart = () => {
           </div>
           <textarea
             name="address"
+            defaultValue={"9828 East Satellite Drive"}
             className="w-full border border-gray-300 rounded-lg p-2 mb-2 text-sm"
             placeholder="Enter your delivery address"
             rows={2}
@@ -115,7 +116,7 @@ const Cart = () => {
             className="bg-blue-500 text-white px-2 py-2 rounded text-sm shadow-2xl"
             onClick={handleQuotation}
           >
-            Send For Quotation
+            Quotation Request
           </button>
         </div>
       )}
