@@ -27,7 +27,7 @@ const Sidebar = () => {
       <div
         className={`${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } fixed md:static top-0 left-0 w-52 h-screen bg-[#f6f5f5] text-black p-5 transition-transform duration-300 md:translate-x-0 z-40`}
+        } fixed md:static top-0 left-0 w-48 h-screen bg-[#f6f5f5] text-black p-5 transition-transform duration-300 md:translate-x-0 z-40`}
       >
         <h3 className="text-xl font-semibold mb-6">Order Service</h3>
         <ul className="space-y-1">

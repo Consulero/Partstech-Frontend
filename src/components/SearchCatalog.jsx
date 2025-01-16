@@ -4,9 +4,11 @@ import {
   getParts,
   getSubcategories,
   searchByVechiclePartTypes,
+  reqQuotes,
 } from "../api";
 import { vehicleState } from "../atoms/vehicleInfo";
-import { useRecoilValue } from "recoil";
+import { quoteState } from "../atoms/quoteSession";
+import { useRecoilValue, useRecoilState } from "recoil";
 import { toast } from "react-toastify";
 import _ from "lodash";
 
@@ -14,6 +16,7 @@ const SearchCatalog = () => {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("parts");
   const [categories, setCategories] = useState([]);
+  const [quote, setQuote] = useRecoilState(quoteState);
   const [showDropdown, setShowDropdown] = useState(false);
   const [subcategories, setSubcategories] = useState([]);
   const [parts, setParts] = useState([]);
@@ -37,7 +40,7 @@ const SearchCatalog = () => {
             { categoryId: 4, categoryName: "Exhaust" },
             { categoryId: 5, categoryName: "Interior" },
             { categoryId: 6, categoryName: "Exterior" },
-            { categoryId: 7, categoryName: "Wheels" },  
+            { categoryId: 7, categoryName: "Wheels" },
             { categoryId: 8, categoryName: "Lighting" },
             { categoryId: 9, categoryName: "Tires" },
             { categoryId: 10, categoryName: "Accessories" },
@@ -69,8 +72,8 @@ const SearchCatalog = () => {
       }
 
       const partIds = searchItem.parts.map((part) => part.partTypeId);
-      const res = await searchByVechiclePartTypes(vehicleInfo, partIds);
-      console.log(res);
+      const res = await reqQuotes(vehicleInfo, partIds);
+      setQuote(res.data);
     } catch (error) {
       console.error(error);
       toast.error("Error searching parts");
