@@ -123,7 +123,7 @@ const SearchVehicle = () => {
         <FaCarAlt className="mt-1" />
         {!_.isEmpty(vehicleInfo) ? (
           <>
-            <p className="text-sm text-center w-[180px] mx-auto break-words">
+            <p className="bg-gray-100 rounded p-1 text-xs font-semibold text-center w-[180px] mx-auto break-words">
               {vehicleInfo.vehicleName}
             </p>
             <button
@@ -134,7 +134,7 @@ const SearchVehicle = () => {
             </button>
           </>
         ) : (
-          <button className="flex flex-row gap-1" onClick={toggleModal}>
+          <button className="flex flex-row gap-1 bg-gray-100 rounded p-1 text-xs font-semibold" onClick={toggleModal}>
             Select Vehicle <FaChevronDown className="mt-1" />
           </button>
         )}

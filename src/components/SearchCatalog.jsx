@@ -215,16 +215,13 @@ const SearchCatalog = () => {
     // setParts(response.data);
 
     const data = [
-      { partTypeId: 1, partTypeName: "Parts1" },
-      { partTypeId: 2, partTypeName: "Parts2" },
-      { partTypeId: 3, partTypeName: "Parts3" },
-      { partTypeId: 4, partTypeName: "Parts4" },
-      { partTypeId: 5, partTypeName: "Parts5" },
-      { partTypeId: 6, partTypeName: "Parts6" },
-      { partTypeId: 7, partTypeName: "Parts7" },
-      { partTypeId: 8, partTypeName: "Parts8" },
-      { partTypeId: 9, partTypeName: "Parts9" },
-      { partTypeId: 10, partTypeName: "Parts10" },
+      { partTypeId: 1, partTypeName: "Air / Fuel Ratio Sensor" },
+      { partTypeId: 2, partTypeName: "Engine Oil Filter" },
+      { partTypeId: 3, partTypeName: "Engine Oil Filter Housing Cap" },
+      { partTypeId: 4, partTypeName: "Cabin Air Filter" },
+      { partTypeId: 5, partTypeName: "Differential Oil" },
+      { partTypeId: 6, partTypeName: "Break Fluid" },
+      { partTypeId: 7, partTypeName: "Break Cleaner" },
     ];
     setParts(data);
     setStatus("part");
@@ -235,7 +232,7 @@ const SearchCatalog = () => {
   };
 
   return (
-    <div className="relative flex items-center w-2/3">
+    <div className="text-sm relative flex items-center w-2/3">
       <select
         value={category}
         onChange={(e) => setCategory(e.target.value)}

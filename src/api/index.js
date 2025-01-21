@@ -47,4 +47,7 @@ export const searchByVechiclePartTypes = (searchParams, partTypeIds) =>
 export const findQuotes = () => api.get(`/quotes`);
 export const reqQuotes = (vehicleInfo, partTypeIds) =>
   api.post(`/quotes/req`, { data: { vehicleInfo, partTypeIds } });
+
+export const updateQuoteStatus = (data) => api.patch(`/quotes`, data);
+
 export default api;
