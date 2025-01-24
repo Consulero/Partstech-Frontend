@@ -34,16 +34,110 @@ const SearchCatalog = () => {
         // const response = await getCategories();
         const response = {
           data: [
-            { categoryId: 1, categoryName: "Engine" },
-            { categoryId: 2, categoryName: "Suspension" },
-            { categoryId: 3, categoryName: "Brakes" },
-            { categoryId: 4, categoryName: "Exhaust" },
-            { categoryId: 5, categoryName: "Interior" },
-            { categoryId: 6, categoryName: "Exterior" },
-            { categoryId: 7, categoryName: "Wheels" },
-            { categoryId: 8, categoryName: "Lighting" },
-            { categoryId: 9, categoryName: "Tires" },
-            { categoryId: 10, categoryName: "Accessories" },
+            {
+              categoryId: 1,
+              categoryName: "Accessories",
+            },
+            {
+              categoryId: 2,
+              categoryName: "Body",
+            },
+            {
+              categoryId: 3,
+              categoryName: "Brake",
+            },
+            {
+              categoryId: 4,
+              categoryName: "Belts and Cooling",
+            },
+            {
+              categoryId: 5,
+              categoryName: "Driveline and Axles",
+            },
+            {
+              categoryId: 6,
+              categoryName: "Electrical, Charging and Starting",
+            },
+            {
+              categoryId: 7,
+              categoryName: "Electrical, Lighting and Body",
+            },
+            {
+              categoryId: 9,
+              categoryName: "Emission Control",
+            },
+            {
+              categoryId: 10,
+              categoryName: "Engine",
+            },
+            {
+              categoryId: 11,
+              categoryName: "Exhaust",
+            },
+            {
+              categoryId: 12,
+              categoryName: "Air and Fuel Delivery",
+            },
+            {
+              categoryId: 13,
+              categoryName: "HVAC",
+            },
+            {
+              categoryId: 14,
+              categoryName: "Ignition",
+            },
+            {
+              categoryId: 15,
+              categoryName: "Steering",
+            },
+            {
+              categoryId: 16,
+              categoryName: "Suspension",
+            },
+            {
+              categoryId: 17,
+              categoryName: "Tire and Wheel",
+            },
+            {
+              categoryId: 18,
+              categoryName: "Vehicles, Equipment, Tools, and Supplies",
+            },
+            {
+              categoryId: 19,
+              categoryName: "Transfer Case",
+            },
+            {
+              categoryId: 20,
+              categoryName: "Transmission",
+            },
+            {
+              categoryId: 22,
+              categoryName: "Wiper and Washer",
+            },
+            {
+              categoryId: 23,
+              categoryName: "Hardware and Service Supplies",
+            },
+            {
+              categoryId: 29,
+              categoryName: "Multifunction Terms",
+            },
+            {
+              categoryId: 42,
+              categoryName: "Entertainment and Telematics",
+            },
+            {
+              categoryId: 44,
+              categoryName: "Household, Shop and Office Products",
+            },
+            {
+              categoryId: 45,
+              categoryName: "Plumbing",
+            },
+            {
+              categoryId: 46,
+              categoryName: "Oil, Fluids and Chemicals",
+            },
           ],
         };
         setCategories(response.data);
@@ -82,107 +176,107 @@ const SearchCatalog = () => {
 
   const handleCategorySelect = async (selectedCategory) => {
     setSearchItem({ ...searchItem, category: selectedCategory });
-    // const response = await getSubcategories(selectedCategory);
-    // setSubcategories(response.data);
-    const data = [
-      {
-        subcategoryId: 116,
-        subcategoryName: "Battery and Related Components",
-      },
-      {
-        subcategoryId: 120,
-        subcategoryName: "Brackets, Flanges and Hangers",
-      },
-      {
-        subcategoryId: 136,
-        subcategoryName: "Cylinder Block Components",
-      },
-      {
-        subcategoryId: 143,
-        subcategoryName: "Electrical Connectors",
-      },
-      {
-        subcategoryId: 180,
-        subcategoryName: "Lighting - Exterior",
-      },
-      {
-        subcategoryId: 211,
-        subcategoryName: "Switches, Solenoids and Actuators",
-      },
-      {
-        subcategoryId: 233,
-        subcategoryName: "Wheel",
-      },
-      {
-        subcategoryId: 246,
-        subcategoryName: "Hardware, Fasteners and Fittings",
-      },
-      {
-        subcategoryId: 249,
-        subcategoryName: "Shop Equipment, Tools and Accessories",
-      },
-      {
-        subcategoryId: 251,
-        subcategoryName: "Decals and Emblems",
-      },
-      {
-        subcategoryId: 261,
-        subcategoryName: "Signage",
-      },
-      {
-        subcategoryId: 263,
-        subcategoryName: "Miscellaneous Merchandise",
-      },
-      {
-        subcategoryId: 290,
-        subcategoryName: "Adhesives, Sealants and Tape",
-      },
-      {
-        subcategoryId: 309,
-        subcategoryName: "Underhood",
-      },
-      {
-        subcategoryId: 311,
-        subcategoryName: "Information Labels",
-      },
-      {
-        subcategoryId: 339,
-        subcategoryName: "RV and Marine Accessories",
-      },
-      {
-        subcategoryId: 437,
-        subcategoryName: "Powersport Accessories",
-      },
-      {
-        subcategoryId: 447,
-        subcategoryName: "Food and Drink",
-      },
-      {
-        subcategoryId: 449,
-        subcategoryName: "Storage and Organization",
-      },
-      {
-        subcategoryId: 456,
-        subcategoryName: "Underhood Accessories",
-      },
-      {
-        subcategoryId: 457,
-        subcategoryName: "Exterior Accessories",
-      },
-      {
-        subcategoryId: 458,
-        subcategoryName: "Interior Accessories",
-      },
-      {
-        subcategoryId: 478,
-        subcategoryName: "Safety Equipment, Tools and Accessories",
-      },
-      {
-        subcategoryId: 480,
-        subcategoryName: "Tow, Hoist and Lift Tools and Accessories",
-      },
-    ];
-    setSubcategories(data);
+    const response = await getSubcategories(selectedCategory);
+    setSubcategories(response.data);
+    // const data = [
+    //   {
+    //     subcategoryId: 116,
+    //     subcategoryName: "Battery and Related Components",
+    //   },
+    //   {
+    //     subcategoryId: 120,
+    //     subcategoryName: "Brackets, Flanges and Hangers",
+    //   },
+    //   {
+    //     subcategoryId: 136,
+    //     subcategoryName: "Cylinder Block Components",
+    //   },
+    //   {
+    //     subcategoryId: 143,
+    //     subcategoryName: "Electrical Connectors",
+    //   },
+    //   {
+    //     subcategoryId: 180,
+    //     subcategoryName: "Lighting - Exterior",
+    //   },
+    //   {
+    //     subcategoryId: 211,
+    //     subcategoryName: "Switches, Solenoids and Actuators",
+    //   },
+    //   {
+    //     subcategoryId: 233,
+    //     subcategoryName: "Wheel",
+    //   },
+    //   {
+    //     subcategoryId: 246,
+    //     subcategoryName: "Hardware, Fasteners and Fittings",
+    //   },
+    //   {
+    //     subcategoryId: 249,
+    //     subcategoryName: "Shop Equipment, Tools and Accessories",
+    //   },
+    //   {
+    //     subcategoryId: 251,
+    //     subcategoryName: "Decals and Emblems",
+    //   },
+    //   {
+    //     subcategoryId: 261,
+    //     subcategoryName: "Signage",
+    //   },
+    //   {
+    //     subcategoryId: 263,
+    //     subcategoryName: "Miscellaneous Merchandise",
+    //   },
+    //   {
+    //     subcategoryId: 290,
+    //     subcategoryName: "Adhesives, Sealants and Tape",
+    //   },
+    //   {
+    //     subcategoryId: 309,
+    //     subcategoryName: "Underhood",
+    //   },
+    //   {
+    //     subcategoryId: 311,
+    //     subcategoryName: "Information Labels",
+    //   },
+    //   {
+    //     subcategoryId: 339,
+    //     subcategoryName: "RV and Marine Accessories",
+    //   },
+    //   {
+    //     subcategoryId: 437,
+    //     subcategoryName: "Powersport Accessories",
+    //   },
+    //   {
+    //     subcategoryId: 447,
+    //     subcategoryName: "Food and Drink",
+    //   },
+    //   {
+    //     subcategoryId: 449,
+    //     subcategoryName: "Storage and Organization",
+    //   },
+    //   {
+    //     subcategoryId: 456,
+    //     subcategoryName: "Underhood Accessories",
+    //   },
+    //   {
+    //     subcategoryId: 457,
+    //     subcategoryName: "Exterior Accessories",
+    //   },
+    //   {
+    //     subcategoryId: 458,
+    //     subcategoryName: "Interior Accessories",
+    //   },
+    //   {
+    //     subcategoryId: 478,
+    //     subcategoryName: "Safety Equipment, Tools and Accessories",
+    //   },
+    //   {
+    //     subcategoryId: 480,
+    //     subcategoryName: "Tow, Hoist and Lift Tools and Accessories",
+    //   },
+    // ];
+    // setSubcategories(data);
     setStatus("subcategory");
   };
 
@@ -210,20 +304,20 @@ const SearchCatalog = () => {
   const handleSubcategorySelect = async (selectedSubCategory) => {
     setSearchItem({ ...searchItem, subcategory: selectedSubCategory });
 
-    // const response = await getParts(searchItem.category, selectedSubCategory);
-    // console.log(response);
-    // setParts(response.data);
+    const response = await getParts(searchItem.category, selectedSubCategory);
+    console.log(response);
+    setParts(response.data);
 
-    const data = [
-      { partTypeId: 1, partTypeName: "Air / Fuel Ratio Sensor" },
-      { partTypeId: 2, partTypeName: "Engine Oil Filter" },
-      { partTypeId: 3, partTypeName: "Engine Oil Filter Housing Cap" },
-      { partTypeId: 4, partTypeName: "Cabin Air Filter" },
-      { partTypeId: 5, partTypeName: "Differential Oil" },
-      { partTypeId: 6, partTypeName: "Break Fluid" },
-      { partTypeId: 7, partTypeName: "Break Cleaner" },
-    ];
-    setParts(data);
+    // const data = [
+    //   { partTypeId: 1, partTypeName: "Air / Fuel Ratio Sensor" },
+    //   { partTypeId: 2, partTypeName: "Engine Oil Filter" },
+    //   { partTypeId: 3, partTypeName: "Engine Oil Filter Housing Cap" },
+    //   { partTypeId: 4, partTypeName: "Cabin Air Filter" },
+    //   { partTypeId: 5, partTypeName: "Differential Oil" },
+    //   { partTypeId: 6, partTypeName: "Break Fluid" },
+    //   { partTypeId: 7, partTypeName: "Break Cleaner" },
+    // ];
+    // setParts(data);
     setStatus("part");
   };
 

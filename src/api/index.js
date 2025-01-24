@@ -50,4 +50,7 @@ export const reqQuotes = (vehicleInfo, partTypeIds) =>
 
 export const updateQuoteStatus = (data) => api.patch(`/quotes`, data);
 
+export const checkPartavailability = (order) =>
+  api.post(`/quotes/refresh`, { data: order });
+
 export default api;
