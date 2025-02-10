@@ -7,6 +7,7 @@ import { FaRegEye } from "react-icons/fa";
 import Modalpopup from "../components/Modelpopup";
 import QuoteDetails from "../components/QuoteDetails";
 import { toast } from "react-toastify";
+import moment from "moment";
 
 const Quotes = () => {
   const [files, setFiles] = useState([]);
@@ -41,7 +42,7 @@ const Quotes = () => {
     setError(null);
 
     try {
-      const response = await findQuotes();
+      const response = await findQuotes(page);
       setFiles(response.data?.data || []);
       setTotalPages(response.data?.pagination?.totalPages || 1);
     } catch (err) {
@@ -66,12 +67,12 @@ const Quotes = () => {
   };
 
   const columns = [
-    { name: "Id", width: "10%" },
-    { name: "PO Number", width: "20%" },
-    { name: "Status", width: "10%" },
+    { name: "PO Number", width: "15%" },
+    { name: "Status", width: "15%" },
+    { name: "Is Ordered", width: "15%" },
     { name: "SessionId", width: "30%" },
     { name: "CreatedAt", width: "20%" },
-    { name: "Action", width: "20%" },
+    { name: "Action", width: "15%" },
   ];
 
   const handleOpenModal = (data) => {
@@ -161,7 +162,6 @@ const Quotes = () => {
                   className={row.selected ? "bg-green-100" : ""}
                   onClick={() => handleRowSelect(rowIndex)}
                 >
-                  <td className={tableCol}>{row.id}</td>
                   <td className={tableCol}>{row.poNumber}</td>
                   <td
                     className={`${tableCol} font-semibold ${
@@ -174,13 +174,18 @@ const Quotes = () => {
                   >
                     {row.status}
                   </td>
+                  <td className={tableCol}>
+                    {row.isOrderPlaced === true ? "Yes" : "No"}
+                  </td>
                   <td className={tableCol}>{row.sessionId}</td>
-                  <td className={tableCol}>{row.createdAt}</td>
+                  <td className={tableCol}>
+                    {moment(row.createdAt).format("DD-MM-YYYY hh:mm A")}
+                  </td>
                   <td className={tableCol}>
                     <FaRegEye
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleOpenModal(row.orders);
+                        handleOpenModal(row);
                       }}
                       className="cursor-pointer text-gray-600 hover:text-blue-500 hover:scale-125 transition-transform duration-200"
                     />

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { GrCatalog } from "react-icons/gr";
 import { FaFileInvoiceDollar } from "react-icons/fa";
+import { MdOutlineShoppingCart } from "react-icons/md";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +15,7 @@ const Sidebar = () => {
   const navLinks = [
     { path: "/catalog", label: "Catalog", icon: GrCatalog },
     { path: "/quotations", label: "Quotation", icon: FaFileInvoiceDollar },
+    { path: "/orders", label: "Order", icon: MdOutlineShoppingCart },
   ];
 
   return (

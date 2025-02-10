@@ -2,12 +2,9 @@ import React from "react";
 import { FaInfoCircle } from "react-icons/fa";
 import { IoStorefrontOutline } from "react-icons/io5";
 
-const PartDetails = ({ index, part, storeName }) => (
-  <div
-    key={index}
-    className="flex items-center justify-between mb-4 border rounded-md p-3 shadow-sm"
-  >
-    <div className="flex items-center">
+const PartDetails = ({ part, storeName }) => (
+  <div className="flex items-center justify-between mb-4 border rounded-md p-3 shadow-sm">
+    <div className="w-96 flex items-center">
       <img
         className="w-20 h-20 object-contain border rounded-md mr-4"
         src={part.imageUrl}

@@ -19,3 +19,16 @@ code {
   cursor:pointer;
   opacity: 0.9;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1; /* light-gray */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8; /* slightly darker */
+}

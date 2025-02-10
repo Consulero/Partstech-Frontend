@@ -5,6 +5,7 @@ import NewCatalog from "./pages/NewCatalog";
 import Quotes from "./pages/Quotes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import OrderList from "./pages/Order";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Routes>
             <Route path="/catalog" element={<NewCatalog />} />
             <Route path="/quotations" element={<Quotes />} />
+            <Route path="/orders" element={<OrderList />} />
           </Routes>
         </div>
       </div>

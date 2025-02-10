@@ -5,7 +5,7 @@ import { checkPartavailability } from "../api";
 import { toast } from "react-toastify";
 import Loader from "./Loader";
 
-const QuoteOder = ({ orderData, index }) => {
+const QuoteOder = ({ orderData, index, isOrderPlaced }) => {
   const [order, setOrder] = useState(orderData);
   const [loader, setLoader] = useState(false);
 
@@ -18,7 +18,7 @@ const QuoteOder = ({ orderData, index }) => {
         setOrder({
           ...order,
           parts: order.parts.map((part) => {
-            const updatedPart = result.data.parts.find(
+            const updatedPart = result.data.parts?.find(
               (updated) => updated.orderItemId === part.orderItemId
             );
             return updatedPart
@@ -41,10 +41,8 @@ const QuoteOder = ({ orderData, index }) => {
       } else {
         toast.error("Couldn't check availability");
       }
-      setLoader(false);
     } catch (err) {
       toast.error("Failed to check availability");
-      setLoader(false);
     } finally {
       setLoader(false);
     }
@@ -53,15 +51,16 @@ const QuoteOder = ({ orderData, index }) => {
   return (
     <div key={index} className="border rounded-md p-4 mb-4 bg-white shadow-sm">
       <div className="flex justify-between items-center text-gray-800 border-b pb-2 mb-4">
-        <button
-          className="flex items-center gap-2 px-3 py-1 text-sm rounded-md bg-gray-600 text-white hover:scale-105 transform transition-all duration-200"
-          onClick={() => refreshQty(order, index)}
-          disabled={loader}
-        >
-          Check Availability
-          {loader && <Loader />}
-        </button>
-
+        {isOrderPlaced === false && (
+          <button
+            className="flex items-center gap-2 px-3 py-1 text-sm rounded-md bg-gray-500 text-white hover:scale-105 transform transition-all duration-200"
+            onClick={() => refreshQty(order, index)}
+            disabled={loader}
+          >
+            Check Availability
+            {loader && <Loader />}
+          </button>
+        )}
         <h2 className="text-lg font-bold">
           {order.supplier.name.toUpperCase()}
         </h2>
@@ -78,7 +77,7 @@ const QuoteOder = ({ orderData, index }) => {
       </div>
       {order.parts.map((part, index) => (
         <PartDetails
-          index={`p-${index}`}
+          key={`part-${index}`}
           part={part}
           storeName={order.store.name}
         />
