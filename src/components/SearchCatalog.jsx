@@ -8,13 +8,15 @@ import {
 } from "../api";
 import { vehicleState } from "../atoms/vehicleInfo";
 import { quoteState } from "../atoms/quoteSession";
+import { categoryState } from "../atoms/category";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { toast } from "react-toastify";
 import _ from "lodash";
 
 const SearchCatalog = () => {
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState("parts");
+  const [] = useState("parts");
+  const [category, setCategory] = useRecoilState(categoryState);
   const [categories, setCategories] = useState([]);
   const [quote, setQuote] = useRecoilState(quoteState);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -156,7 +158,7 @@ const SearchCatalog = () => {
 
   const handleSearch = async () => {
     try {
-      if (_.isEmpty(query)) {
+      if (_.isEmpty(query) && category === "parts") {
         toast.error("Please Type keyword to search");
         return;
       }
@@ -166,7 +168,7 @@ const SearchCatalog = () => {
       }
 
       const partIds = searchItem.parts.map((part) => part.partTypeId);
-      const res = await reqQuotes(vehicleInfo, partIds);
+      const res = await reqQuotes(vehicleInfo, partIds, category);
       setQuote(res.data);
     } catch (error) {
       console.error(error);
@@ -178,105 +180,6 @@ const SearchCatalog = () => {
     setSearchItem({ ...searchItem, category: selectedCategory });
     const response = await getSubcategories(selectedCategory);
     setSubcategories(response.data);
-    // const data = [
-    //   {
-    //     subcategoryId: 116,
-    //     subcategoryName: "Battery and Related Components",
-    //   },
-    //   {
-    //     subcategoryId: 120,
-    //     subcategoryName: "Brackets, Flanges and Hangers",
-    //   },
-    //   {
-    //     subcategoryId: 136,
-    //     subcategoryName: "Cylinder Block Components",
-    //   },
-    //   {
-    //     subcategoryId: 143,
-    //     subcategoryName: "Electrical Connectors",
-    //   },
-    //   {
-    //     subcategoryId: 180,
-    //     subcategoryName: "Lighting - Exterior",
-    //   },
-    //   {
-    //     subcategoryId: 211,
-    //     subcategoryName: "Switches, Solenoids and Actuators",
-    //   },
-    //   {
-    //     subcategoryId: 233,
-    //     subcategoryName: "Wheel",
-    //   },
-    //   {
-    //     subcategoryId: 246,
-    //     subcategoryName: "Hardware, Fasteners and Fittings",
-    //   },
-    //   {
-    //     subcategoryId: 249,
-    //     subcategoryName: "Shop Equipment, Tools and Accessories",
-    //   },
-    //   {
-    //     subcategoryId: 251,
-    //     subcategoryName: "Decals and Emblems",
-    //   },
-    //   {
-    //     subcategoryId: 261,
-    //     subcategoryName: "Signage",
-    //   },
-    //   {
-    //     subcategoryId: 263,
-    //     subcategoryName: "Miscellaneous Merchandise",
-    //   },
-    //   {
-    //     subcategoryId: 290,
-    //     subcategoryName: "Adhesives, Sealants and Tape",
-    //   },
-    //   {
-    //     subcategoryId: 309,
-    //     subcategoryName: "Underhood",
-    //   },
-    //   {
-    //     subcategoryId: 311,
-    //     subcategoryName: "Information Labels",
-    //   },
-    //   {
-    //     subcategoryId: 339,
-    //     subcategoryName: "RV and Marine Accessories",
-    //   },
-    //   {
-    //     subcategoryId: 437,
-    //     subcategoryName: "Powersport Accessories",
-    //   },
-    //   {
-    //     subcategoryId: 447,
-    //     subcategoryName: "Food and Drink",
-    //   },
-    //   {
-    //     subcategoryId: 449,
-    //     subcategoryName: "Storage and Organization",
-    //   },
-    //   {
-    //     subcategoryId: 456,
-    //     subcategoryName: "Underhood Accessories",
-    //   },
-    //   {
-    //     subcategoryId: 457,
-    //     subcategoryName: "Exterior Accessories",
-    //   },
-    //   {
-    //     subcategoryId: 458,
-    //     subcategoryName: "Interior Accessories",
-    //   },
-    //   {
-    //     subcategoryId: 478,
-    //     subcategoryName: "Safety Equipment, Tools and Accessories",
-    //   },
-    //   {
-    //     subcategoryId: 480,
-    //     subcategoryName: "Tow, Hoist and Lift Tools and Accessories",
-    //   },
-    // ];
-    // setSubcategories(data);
     setStatus("subcategory");
   };
 
@@ -303,21 +206,8 @@ const SearchCatalog = () => {
 
   const handleSubcategorySelect = async (selectedSubCategory) => {
     setSearchItem({ ...searchItem, subcategory: selectedSubCategory });
-
     const response = await getParts(searchItem.category, selectedSubCategory);
-    console.log(response);
     setParts(response.data);
-
-    // const data = [
-    //   { partTypeId: 1, partTypeName: "Air / Fuel Ratio Sensor" },
-    //   { partTypeId: 2, partTypeName: "Engine Oil Filter" },
-    //   { partTypeId: 3, partTypeName: "Engine Oil Filter Housing Cap" },
-    //   { partTypeId: 4, partTypeName: "Cabin Air Filter" },
-    //   { partTypeId: 5, partTypeName: "Differential Oil" },
-    //   { partTypeId: 6, partTypeName: "Break Fluid" },
-    //   { partTypeId: 7, partTypeName: "Break Cleaner" },
-    // ];
-    // setParts(data);
     setStatus("part");
   };
 
@@ -326,46 +216,46 @@ const SearchCatalog = () => {
   };
 
   return (
-    <div className="text-sm relative flex items-center w-2/3">
+    <div className='text-sm relative flex items-center w-2/3'>
       <select
         value={category}
         onChange={(e) => setCategory(e.target.value)}
-        className="px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className='px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500'
       >
-        <option value="parts">Parts</option>
-        <option value="tyre">Tyre</option>
+        <option value='parts'>Parts</option>
+        <option value='tires'>Tires</option>
       </select>
 
-      <div className="relative w-full">
+      <div className='relative w-full'>
         <input
-          type="text"
+          type='text'
           value={query}
           onChange={handleInputChange}
           onFocus={toggleDropdown}
           placeholder={"Search..."}
-          className="w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className='w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500'
         />
-        {category !== "tyre" && showDropdown && categories.length > 0 && (
-          <div className="absolute z-10 w-full bg-white border border-gray-300 rounded shadow-md max-h-60 overflow-y-auto p-2">
-            <div className="flex justify-between items-center mb-1">
-              <p className="ml-2 text-center font-semibold mb-2">
+        {category !== "tires" && showDropdown && categories.length > 0 && (
+          <div className='absolute z-10 w-full bg-white border border-gray-300 rounded shadow-md max-h-60 overflow-y-auto p-2'>
+            <div className='flex justify-between items-center mb-1'>
+              <p className='ml-2 text-center font-semibold mb-2'>
                 {status.toLocaleUpperCase()}
               </p>
               <button
-                className="text-red-500 mr-2"
+                className='text-red-500 mr-2'
                 onClick={clearCategorySearch}
               >
                 Clear
               </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
+            <div className='grid grid-cols-2 gap-2'>
               {status === "category" &&
                 categories.map((cat) => (
                   <div
                     key={cat.categoryId}
                     onClick={() => handleCategorySelect(cat.categoryId)}
-                    className="px-4 py-2 cursor-pointer hover:bg-blue-100 border rounded text-center"
+                    className='px-4 py-2 cursor-pointer hover:bg-blue-100 border rounded text-center'
                   >
                     {cat.categoryName}
                   </div>
@@ -375,7 +265,7 @@ const SearchCatalog = () => {
                   <div
                     key={cat.subcategoryId}
                     onClick={() => handleSubcategorySelect(cat.subcategoryId)}
-                    className="px-4 py-2 cursor-pointer hover:bg-blue-100 border rounded text-center"
+                    className='px-4 py-2 cursor-pointer hover:bg-blue-100 border rounded text-center'
                   >
                     {cat.subcategoryName}
                   </div>
@@ -384,15 +274,15 @@ const SearchCatalog = () => {
                 parts.map((part) => (
                   <div
                     key={part.partTypeId}
-                    className="flex items-center px-4 py-2 cursor-pointer hover:bg-blue-100 border rounded"
+                    className='flex items-center px-4 py-2 cursor-pointer hover:bg-blue-100 border rounded'
                   >
                     <input
-                      type="checkbox"
+                      type='checkbox'
                       checked={searchItem.parts.some(
                         (p) => p.partTypeId === part.partTypeId
                       )}
                       onChange={() => handlePartToggle(part)}
-                      className="mr-2"
+                      className='mr-2'
                     />
                     {part.partTypeName}
                   </div>
@@ -404,7 +294,7 @@ const SearchCatalog = () => {
 
       <button
         onClick={handleSearch}
-        className="px-4 py-2 text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className='px-4 py-2 text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500'
       >
         Search
       </button>

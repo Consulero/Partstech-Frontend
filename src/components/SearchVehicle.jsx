@@ -119,31 +119,34 @@ const SearchVehicle = () => {
 
   return (
     <div>
-      <div className="flex flex-row p-2 gap-2 justify-items-center">
-        <FaCarAlt className="mt-1" />
+      <div className='flex flex-row p-2 gap-2 justify-items-center'>
+        <FaCarAlt className='mt-1' />
         {!_.isEmpty(vehicleInfo) ? (
           <>
-            <p className="bg-gray-100 rounded p-1 text-xs font-semibold text-center w-[180px] mx-auto break-words">
+            <p className='bg-gray-100 rounded p-1 text-xs font-semibold text-center mx-auto break-words'>
               {vehicleInfo.vehicleName}
             </p>
             <button
-              className="text-red-400 hover:text-red-500"
+              className='text-red-400 hover:text-red-500'
               onClick={clearVehicleInfo}
             >
               <ImCross />
             </button>
           </>
         ) : (
-          <button className="flex flex-row gap-1 bg-gray-100 rounded p-1 text-xs font-semibold" onClick={toggleModal}>
-            Select Vehicle <FaChevronDown className="mt-1" />
+          <button
+            className='flex flex-row gap-1 bg-gray-100 rounded p-1 text-xs font-semibold'
+            onClick={toggleModal}
+          >
+            Select Vehicle <FaChevronDown className='mt-1' />
           </button>
         )}
       </div>
       {isModalOpen && (
-        <div className="fixed inset-0 bg-gray-100 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-gray-100 w-96 p-4 rounded shadow-lg">
+        <div className='fixed inset-0 bg-gray-100 bg-opacity-50 flex justify-center items-center'>
+          <div className='bg-gray-100 w-96 p-4 rounded shadow-lg'>
             {/* Modal Header with Tabs */}
-            <div className="flex border-b">
+            <div className='flex border-b'>
               <button
                 className={`flex-1 p-2 ${
                   activeTab === "Tab1"
@@ -167,20 +170,20 @@ const SearchVehicle = () => {
             </div>
 
             {/* Modal Body */}
-            <div className="p-4">
+            <div className='p-4'>
               {activeTab === "Tab1" && (
                 <>
-                  <table className="w-full">
+                  <table className='w-full'>
                     <tbody>
                       <tr>
-                        <td className="pb-2">
+                        <td className='pb-2'>
                           <select
-                            name="year"
+                            name='year'
                             value={formData.year}
                             onChange={handleInputChange}
-                            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                           >
-                            <option value="" disabled>
+                            <option value='' disabled>
                               Select Year
                             </option>
                             {years?.map((year) => (
@@ -192,15 +195,15 @@ const SearchVehicle = () => {
                         </td>
                       </tr>
                       <tr>
-                        <td className="pb-2">
+                        <td className='pb-2'>
                           <select
                             disabled={!formData.year}
-                            name="make"
+                            name='make'
                             value={formData.make}
                             onChange={handleInputChange}
-                            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
+                            className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50'
                           >
-                            <option value="" disabled>
+                            <option value='' disabled>
                               Select Make
                             </option>
                             {makes?.map(({ makeId, makeName }) => (
@@ -212,15 +215,15 @@ const SearchVehicle = () => {
                         </td>
                       </tr>
                       <tr>
-                        <td className="pb-2">
+                        <td className='pb-2'>
                           <select
                             disabled={!formData.make}
-                            name="model"
+                            name='model'
                             value={formData.model}
                             onChange={handleInputChange}
-                            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
+                            className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50'
                           >
-                            <option value="" disabled>
+                            <option value='' disabled>
                               Select Model
                             </option>
                             {models?.map(({ modelId, modelName }) => (
@@ -232,15 +235,15 @@ const SearchVehicle = () => {
                         </td>
                       </tr>
                       <tr>
-                        <td className="pb-2">
+                        <td className='pb-2'>
                           <select
                             disabled={!formData.model}
-                            name="submodel"
+                            name='submodel'
                             value={formData.submodel}
                             onChange={handleInputChange}
-                            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
+                            className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50'
                           >
-                            <option value="" disabled>
+                            <option value='' disabled>
                               Select Submodel
                             </option>
                             {submodels?.map(({ submodelId, submodelName }) => (
@@ -263,12 +266,12 @@ const SearchVehicle = () => {
                           /> */}
                           <select
                             disabled={!formData.submodel}
-                            name="engine"
+                            name='engine'
                             value={formData.engine}
                             onChange={handleInputChange}
-                            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
+                            className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50'
                           >
-                            <option value="" disabled>
+                            <option value='' disabled>
                               Select Engine
                             </option>
                             {engines?.map(({ engineId, engineName }) => (
@@ -284,17 +287,17 @@ const SearchVehicle = () => {
                 </>
               )}
               {activeTab === "Tab2" && (
-                <table className="w-full">
+                <table className='w-full'>
                   <tbody>
                     <tr>
                       <td>
                         <input
-                          type="text"
-                          name="vin"
+                          type='text'
+                          name='vin'
                           value={formData.vin}
                           onChange={handleInputChange}
-                          className="placeholder:italic placeholder:text-sm placeholder:p-2 w-full p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          placeholder="Enter VIN"
+                          className='placeholder:italic placeholder:text-sm placeholder:p-2 w-full p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                          placeholder='Enter VIN'
                         />
                       </td>
                     </tr>
@@ -304,15 +307,15 @@ const SearchVehicle = () => {
             </div>
 
             {/* Modal Footer */}
-            <div className="flex justify-end gap-2">
+            <div className='flex justify-end gap-2'>
               <button
-                className="px-4 py-1 rounded bg-red-500 text-white text-sm"
+                className='px-4 py-1 rounded bg-red-500 text-white text-sm'
                 onClick={onClose}
               >
                 Close
               </button>
               <button
-                className="bg-blue-500 text-white px-4 py-1 rounded  text-sm"
+                className='bg-blue-500 text-white px-4 py-1 rounded  text-sm'
                 onClick={handleSave}
               >
                 Search

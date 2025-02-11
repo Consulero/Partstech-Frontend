@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { GrCatalog } from "react-icons/gr";
 import { FaFileInvoiceDollar } from "react-icons/fa";
-import { MdOutlineShoppingCart } from "react-icons/md";
+import { MdOutlineShoppingCart, MdOutlineInventory2 } from "react-icons/md";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,12 +16,13 @@ const Sidebar = () => {
     { path: "/catalog", label: "Catalog", icon: GrCatalog },
     { path: "/quotations", label: "Quotation", icon: FaFileInvoiceDollar },
     { path: "/orders", label: "Order", icon: MdOutlineShoppingCart },
+    { path: "/inventory", label: "Inventory", icon: MdOutlineInventory2 },
   ];
 
   return (
     <>
       <button
-        className="md:hidden p-3 fixed top-4 left-4 bg-gray-200 rounded-lg z-50"
+        className='md:hidden p-3 fixed top-4 left-4 bg-gray-200 rounded-lg z-50'
         onClick={toggleSidebar}
       >
         ☰
@@ -31,8 +32,8 @@ const Sidebar = () => {
           isOpen ? "translate-x-0" : "-translate-x-full"
         } fixed md:static top-0 left-0 w-48 h-screen bg-[#f6f5f5] text-black p-5 transition-transform duration-300 md:translate-x-0 z-40`}
       >
-        <h3 className="text-xl font-semibold mb-6">Order Service</h3>
-        <ul className="space-y-1">
+        <h3 className='text-xl font-semibold mb-6'>Order Service</h3>
+        <ul className='space-y-1'>
           {navLinks.map(({ path, label, icon: Icon }) => (
             <li key={path}>
               <Link
@@ -43,7 +44,7 @@ const Sidebar = () => {
                     : "hover:text-blue-500"
                 }`}
               >
-                <Icon className="w-5 h-5 mr-3" />
+                <Icon className='w-5 h-5 mr-3' />
                 {label}
               </Link>
             </li>
@@ -52,7 +53,7 @@ const Sidebar = () => {
       </div>
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 md:hidden z-30"
+          className='fixed inset-0 bg-black bg-opacity-50 md:hidden z-30'
           onClick={toggleSidebar}
         />
       )}
