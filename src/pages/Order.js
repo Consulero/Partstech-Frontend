@@ -11,6 +11,7 @@ const OrderList = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [reloadTable, setReloadTable] = useState(false)
 
   const fetchFiles = async (page = 1) => {
     setLoading(true);
@@ -32,7 +33,7 @@ const OrderList = () => {
     setFiles((prevFiles) =>
       prevFiles.map((file) => ({ ...file, selected: false }))
     );
-  }, [currentPage]);
+  }, [currentPage, reloadTable]);
 
   const handlePageChange = (page) => {
     if (page > 0 && page <= totalPages) {
@@ -51,7 +52,7 @@ const OrderList = () => {
       <div className="overflow-hidden">
         <div className="overflow-auto" style={{ maxHeight: "420px" }}>
           {files.map((row, rowIndex) => (
-            <OrderItem key={rowIndex} data={row} />
+            <OrderItem key={rowIndex} data={row} setReloadTable={setReloadTable} />
           ))}
         </div>
       </div>

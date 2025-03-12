@@ -46,12 +46,13 @@ const InventoryList = () => {
     };
 
     const columns = [
-        { header: "Id", key: "id", width: "15%" },
-        { header: "Part", key: "partNumber", width: "25%" },
-        { header: "on-Hand", key: "onHand", width: "20%" },
-        { header: "Price", key: "partPrice", width: "20%" },
-        { header: "Cost", key: "partCost", width: "20%" },
-
+        { header: "Image", key: "imageUrl", width: "15%", type: "img" },
+        { header: "Name", key: "partName", width: "30%" },
+        { header: "Part Id", key: "partId", width: "15%" },
+        { header: "Quantity", key: "quantity", width: "10%" },
+        { header: "Price", key: "pricePrice", width: "10%" },
+        { header: "Cost", key: "priceCost", width: "10%" },
+        { header: "List Price", key: "priceList", width: "10%" },
     ];
 
     useEffect(() => {

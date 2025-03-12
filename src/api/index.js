@@ -62,4 +62,6 @@ export const findInventory = (page = 1) => api.get(`/inventory?page=${page}`);
 
 export const setOrderDetails = (data) => api.post(`/orders/details`, { data });
 
+export const addInventoryItems = (data) => api.post(`/orders/inventory`, { data });
+
 export default api;

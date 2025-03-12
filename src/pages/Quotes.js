@@ -67,12 +67,13 @@ const Quotes = () => {
   };
 
   const columns = [
-    { name: "PO Number", width: "15%" },
+    { name: "PO Number", width: "20%" },
+    { name: "Type", width: "15%" },
     { name: "Status", width: "15%" },
     { name: "Is Ordered", width: "15%" },
-    { name: "SessionId", width: "30%" },
+    // { name: "SessionId", width: "30%" },
     { name: "CreatedAt", width: "20%" },
-    { name: "Action", width: "15%" },
+    { name: "Action", width: "5%" },
   ];
 
   const handleOpenModal = (data) => {
@@ -128,11 +129,10 @@ const Quotes = () => {
           disabled={selectedRows.length !== 1}
           onClick={handleUpdateStatus}
           className={`px-3 py-1 text-sm rounded-md 
-      ${
-        selectedRows.length !== 1
-          ? "bg-blue-300 text-white cursor-not-allowed"
-          : "bg-blue-500 text-white hover:scale-110 transform transition-all duration-200"
-      }`}
+      ${selectedRows.length !== 1
+              ? "bg-blue-300 text-white cursor-not-allowed"
+              : "bg-blue-500 text-white hover:scale-110 transform transition-all duration-200"
+            }`}
         >
           Save
         </button>
@@ -163,21 +163,24 @@ const Quotes = () => {
                   onClick={() => handleRowSelect(rowIndex)}
                 >
                   <td className={tableCol}>{row.poNumber}</td>
+                  <td className={tableCol}>
+                    {row.orderType}
+                  </td>
                   <td
-                    className={`${tableCol} font-semibold ${
-                      row.status === "pending"
-                        ? "text-yellow-500"
-                        : row.status === "rejected"
+                    className={`${tableCol} font-semibold ${row.status === "pending"
+                      ? "text-yellow-500"
+                      : row.status === "rejected"
                         ? "text-red-500"
                         : "text-green-500"
-                    }`}
+                      }`}
                   >
                     {row.status}
                   </td>
+
                   <td className={tableCol}>
                     {row.isOrderPlaced === true ? "Yes" : "No"}
                   </td>
-                  <td className={tableCol}>{row.sessionId}</td>
+                  {/* <td className={tableCol}>{row.sessionId}</td> */}
                   <td className={tableCol}>
                     {moment(row.createdAt).format("DD-MM-YYYY hh:mm A")}
                   </td>
