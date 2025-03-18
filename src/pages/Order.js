@@ -12,13 +12,14 @@ const OrderList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [reloadTable, setReloadTable] = useState(false)
+  const [activeTab, setActiveTab] = useState("part");
 
-  const fetchFiles = async (page = 1) => {
+  const fetchFiles = async (page = 1, activeTab) => {
     setLoading(true);
     setError(null);
 
     try {
-      const response = await findOrders(page);
+      const response = await findOrders(page, activeTab);
       setFiles(response.data?.data || []);
       setTotalPages(response.data?.pagination?.totalPages || 1);
     } catch (err) {
@@ -29,11 +30,16 @@ const OrderList = () => {
   };
 
   useEffect(() => {
-    fetchFiles(currentPage);
+    fetchFiles(currentPage, activeTab);
     setFiles((prevFiles) =>
       prevFiles.map((file) => ({ ...file, selected: false }))
     );
-  }, [currentPage, reloadTable]);
+  }, [currentPage, reloadTable, activeTab]);
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    setCurrentPage(1); // Reset pagination when switching tabs
+  };
 
   const handlePageChange = (page) => {
     if (page > 0 && page <= totalPages) {
@@ -48,6 +54,26 @@ const OrderList = () => {
     <div className="p-5">
       <div className="flex justify-between items-center mb-3 text-center">
         <HeaderSection title={"Orders List"} />
+      </div>
+      <div className='flex border-b'>
+        <button
+          className={`flex-1 p-2 ${activeTab === "part"
+            ? "border-b-2 border-blue-500 font-bold"
+            : ""
+            }`}
+          onClick={() => handleTabChange("part")}
+        >
+          Part
+        </button>
+        <button
+          className={`flex-1 p-2 ${activeTab === "tire"
+            ? "border-b-2 border-blue-500 font-bold"
+            : ""
+            }`}
+          onClick={() => handleTabChange("tire")}
+        >
+          Tire
+        </button>
       </div>
       <div className="overflow-hidden">
         <div className="overflow-auto" style={{ maxHeight: "420px" }}>

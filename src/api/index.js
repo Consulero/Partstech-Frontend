@@ -46,17 +46,17 @@ export const searchByVechiclePartTypes = (searchParams, partTypeIds) =>
   });
 export const findQuotes = (page = 1) => api.get(`/quotes?page=${page}`);
 export const reqQuotes = (vehicleInfo) =>
-  api.post(`/quotes/req`, { data: { vehicleInfo} });
+  api.post(`/quotes/req`, { data: { vehicleInfo } });
 
 export const updateQuoteStatus = (data) => api.patch(`/quotes`, data);
 
 export const checkPartavailability = (order) =>
   api.post(`/quotes/refresh`, { data: order });
 
-export const placeOrder = (order, orderId) =>
-  api.post(`/orders/ps`, { data: order, orderId });
+export const placeOrder = (order, orderId, orderType) =>
+  api.post(`/orders/ps`, { data: order, orderId, orderType });
 
-export const findOrders = (page = 1) => api.get(`/orders?page=${page}`);
+export const findOrders = (page = 1, orderType) => api.get(`/orders?page=${page}&orderType=${orderType}`);
 
 export const findInventory = (page = 1) => api.get(`/inventory?page=${page}`);
 
